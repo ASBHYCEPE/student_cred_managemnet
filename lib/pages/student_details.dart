@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cred_management/models/academic_program.dart';
 
 class StudentDetails extends StatefulWidget {
   final String appBarTitle;
@@ -11,8 +12,12 @@ class StudentDetails extends StatefulWidget {
 
 class _StudentDetailsState extends State<StudentDetails> {
   final String appBarTitle;
+  String? selectedDepartment = AcademicProgram.department.first;
+  List<String> course = AcademicProgram.ASCourse;
+  String? selectedCourse;
 
   _StudentDetailsState({required this.appBarTitle});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +35,7 @@ class _StudentDetailsState extends State<StudentDetails> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Center(
               child: Text(
@@ -74,6 +80,72 @@ class _StudentDetailsState extends State<StudentDetails> {
             ),
             TextFormField(
               decoration: const InputDecoration(labelText: 'Admission Year'),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            const Text('Department', style: TextStyle(fontSize: 18)),
+            DropdownButton(
+              isExpanded: true,
+              underline: Container(height: 1, color: Colors.grey[500]),
+              items: AcademicProgram.department.map((e) {
+                return DropdownMenuItem<String>(
+                  value: e,
+                  child: Text(e),
+                  enabled: true,
+                );
+              }).toList(),
+              value: selectedDepartment,
+              onChanged: (String? value) {
+                selectedCourse = null;
+                switch (value) {
+                  case 'Arts and Science':
+                    course = AcademicProgram.ASCourse;
+                    break;
+                  case 'Business and Accountancy':
+                    course = AcademicProgram.BACourse;
+                    break;
+                  case 'Computer Studies':
+                    course = AcademicProgram.CSCourse;
+                    break;
+                  case 'Criminal Justice Education':
+                    course = AcademicProgram.CJECourse;
+                    break;
+                  case 'Education':
+                    course = AcademicProgram.educCourse;
+                    break;
+                  case 'Engineering and Architecture':
+                    course = AcademicProgram.EACourse;
+                    break;
+                  case 'Nursing':
+                    course = AcademicProgram.nursCourse;
+                    break;
+                }
+                setState(() {
+                  selectedDepartment = value;
+                });
+              },
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            const Text('Course', style: TextStyle(fontSize: 18)),
+            DropdownButton(
+              isExpanded: true,
+              underline: Container(height: 1, color: Colors.grey[500]),
+              items: course.map((e) {
+                return DropdownMenuItem<String>(
+                  value: e,
+                  child: Text(e),
+                  enabled: true,
+                );
+              }).toList(),
+              value: selectedCourse,
+              onChanged: (String? value) {
+                setState(() {
+                  selectedCourse = value;
+                });
+              },
             ),
           ],
         ),
