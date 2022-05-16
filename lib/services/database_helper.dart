@@ -78,10 +78,24 @@ class DatabaseHelper {
 
   Future<int> updateStudent(Student student) async {
     final db = await database;
-    return await db.update('student', student.toJson(),
-        where: 'studentId = ?',
-        whereArgs: [student.studentID],
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.rawUpdate('''
+          UPDATE student SET 
+          firstName = ?, 
+          lastName = ?, 
+          middleName = ?, 
+          admissionYear = ?, 
+          course = ?, 
+          department = ?
+          WHERE studentId = ?
+          ''', [
+      student.firstName,
+      student.lastName,
+      student.middleName,
+      student.admissionYear,
+      student.course,
+      student.department,
+      student.studentID
+    ]);
   }
 
   Future<int> deleteStudent(Student student) async {
