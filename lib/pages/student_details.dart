@@ -1,4 +1,5 @@
 import 'package:cred_management/models/student.dart';
+import 'package:cred_management/services/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:cred_management/models/academic_program.dart';
 
@@ -16,27 +17,26 @@ class StudentDetails extends StatefulWidget {
 class _StudentDetailsState extends State<StudentDetails> {
   final String appBarTitle;
   final Student? student;
-  String? selectedDepartment = AcademicProgram.department.first;
-  List<String> course = AcademicProgram.ASCourse;
+  final studentIDController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final middleNameController = TextEditingController();
+  final admissionYearController = TextEditingController();
+  String? selectedDepartment;
   String? selectedCourse;
+  List<String> course = [];
 
   _StudentDetailsState({required this.appBarTitle, this.student});
 
   @override
   Widget build(BuildContext context) {
-    final studentIDController = TextEditingController();
-    final firstNameController = TextEditingController();
-    final lastNameController = TextEditingController();
-    final middleNameController = TextEditingController();
-    final admissionYearController = TextEditingController();
-
     if (student != null) {
       studentIDController.text = student!.studentID;
       firstNameController.text = student!.firstName;
       lastNameController.text = student!.lastName;
       middleNameController.text = student!.middleName;
       admissionYearController.text = student!.admissionYear;
-      selectedCourse = student!.course;
+      selectedCourse = null;
       selectedDepartment = student!.department;
     }
 
@@ -172,6 +172,62 @@ class _StudentDetailsState extends State<StudentDetails> {
                 });
               },
             ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () async {
+                      final studentID = studentIDController.text;
+                      final firstName = firstNameController.text;
+                      final lastName = lastNameController.text;
+                      final middleName = middleNameController.text;
+                      final admissionYear = admissionYearController.text;
+                      final department = selectedDepartment;
+                      final course = selectedCourse;
+
+                      if (studentID.isEmpty ||
+                          firstName.isEmpty ||
+                          middleName.isEmpty ||
+                          lastName.isEmpty ||
+                          admissionYear.isEmpty ||
+                          department == null ||
+                          course == null) {
+                        return;
+                      }
+
+                      final Student model = Student(
+                          studentID: studentID,
+                          firstName: firstName,
+                          lastName: lastName,
+                          middleName: middleName,
+                          admissionYear: admissionYear,
+                          department: department,
+                          course: course);
+
+                      if (student == null) {
+                        DatabaseHelper.instance.addStudent(model);
+                      } else {
+                        DatabaseHelper.instance.updateStudent(model);
+                      }
+
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'SAVE STUDENT',
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    style:
+                        TextButton.styleFrom(backgroundColor: Colors.lightBlue),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
