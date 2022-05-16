@@ -1,22 +1,26 @@
+import 'package:cred_management/models/student.dart';
 import 'package:flutter/material.dart';
 import 'package:cred_management/models/academic_program.dart';
 
 class StudentDetails extends StatefulWidget {
   final String appBarTitle;
-  StudentDetails({Key? key, required this.appBarTitle}) : super(key: key);
+  final Student? student;
+  StudentDetails({Key? key, required this.appBarTitle, this.student})
+      : super(key: key);
 
   @override
   State<StudentDetails> createState() =>
-      _StudentDetailsState(appBarTitle: appBarTitle);
+      _StudentDetailsState(appBarTitle: appBarTitle, student: student);
 }
 
 class _StudentDetailsState extends State<StudentDetails> {
   final String appBarTitle;
+  final Student? student;
   String? selectedDepartment = AcademicProgram.department.first;
   List<String> course = AcademicProgram.ASCourse;
   String? selectedCourse;
 
-  _StudentDetailsState({required this.appBarTitle});
+  _StudentDetailsState({required this.appBarTitle, this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,16 @@ class _StudentDetailsState extends State<StudentDetails> {
     final lastNameController = TextEditingController();
     final middleNameController = TextEditingController();
     final admissionYearController = TextEditingController();
+
+    if (student != null) {
+      studentIDController.text = student!.studentID;
+      firstNameController.text = student!.firstName;
+      lastNameController.text = student!.lastName;
+      middleNameController.text = student!.middleName;
+      admissionYearController.text = student!.admissionYear;
+      selectedCourse = student!.course;
+      selectedDepartment = student!.department;
+    }
 
     return Scaffold(
       appBar: AppBar(
