@@ -76,7 +76,7 @@ class DatabaseHelper {
     ]);
   }
 
-  Future<int> updateContact(Student student) async {
+  Future<int> updateStudent(Student student) async {
     final db = await database;
     return await db.update('contacts', student.toJson(),
         where: 'id = ?',
@@ -84,7 +84,7 @@ class DatabaseHelper {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<int> deleteContact(Student student) async {
+  Future<int> deleteStudent(Student student) async {
     final db = await database;
 
     return db
