@@ -6,7 +6,7 @@ class Student {
   final String admissionYear;
   final String course;
   final String department;
-  final DateTime filingDate;
+  final DateTime? filingDate;
 
   Student(
       {required this.studentID,
@@ -16,7 +16,7 @@ class Student {
       required this.admissionYear,
       required this.department,
       required this.course,
-      required this.filingDate});
+      this.filingDate});
 
   factory Student.fromJson(Map<String, dynamic> json) => Student(
       studentID: json['studentID'],
@@ -36,6 +36,6 @@ class Student {
         'admissionYear': admissionYear,
         'course': course,
         'department': department,
-        'filingDate': filingDate.toIso8601String()
+        'filingDate': filingDate!.toIso8601String()
       };
 }
