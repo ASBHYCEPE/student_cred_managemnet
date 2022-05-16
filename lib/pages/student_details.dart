@@ -35,10 +35,7 @@ class _StudentDetailsState extends State<StudentDetails> {
   void initState() {
     super.initState();
     if (student != null) {
-      final DateFormat formatter = DateFormat('yyyy-MM-dd');
-      final String formatted =
-          formatter.format(DateTime.parse(student!.filingDate.toString()));
-      dateFiledController.text = formatted;
+      dateFiledController.text = dateFormattted();
       studentIDController.text = student!.studentID;
       firstNameController.text = student!.firstName;
       lastNameController.text = student!.lastName;
@@ -234,6 +231,13 @@ class _StudentDetailsState extends State<StudentDetails> {
         ),
       ),
     );
+  }
+
+  String dateFormattted() {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted =
+        formatter.format(DateTime.parse(student!.filingDate.toString()));
+    return formatted;
   }
 
   List<String> getCourse(String department) {
