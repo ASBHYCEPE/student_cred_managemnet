@@ -123,10 +123,10 @@ class _StudentDetailsState extends State<StudentDetails> {
             DropdownButton(
               isExpanded: true,
               underline: Container(height: 1, color: Colors.grey[500]),
-              items: AcademicProgram.department.map((e) {
+              items: AcademicProgram.department.map((department) {
                 return DropdownMenuItem<String>(
-                  value: e,
-                  child: Text(e),
+                  value: department,
+                  child: Text(department),
                   enabled: true,
                 );
               }).toList(),
@@ -146,10 +146,10 @@ class _StudentDetailsState extends State<StudentDetails> {
             DropdownButton(
               isExpanded: true,
               underline: Container(height: 1, color: Colors.grey[500]),
-              items: course.map((e) {
+              items: course.map((course) {
                 return DropdownMenuItem<String>(
-                  value: e,
-                  child: Text(e),
+                  value: course,
+                  child: Text(course),
                   enabled: true,
                 );
               }).toList(),
