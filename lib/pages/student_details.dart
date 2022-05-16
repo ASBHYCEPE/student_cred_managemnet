@@ -3,6 +3,7 @@ import 'package:cred_management/services/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:cred_management/models/academic_program.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class StudentDetails extends StatefulWidget {
   final String appBarTitle;
@@ -23,6 +24,7 @@ class _StudentDetailsState extends State<StudentDetails> {
   final lastNameController = TextEditingController();
   final middleNameController = TextEditingController();
   final admissionYearController = TextEditingController();
+  final dateFiledController = TextEditingController();
   String? selectedDepartment;
   String? selectedCourse;
   List<String> course = [];
@@ -33,6 +35,10 @@ class _StudentDetailsState extends State<StudentDetails> {
   void initState() {
     super.initState();
     if (student != null) {
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted =
+          formatter.format(DateTime.parse(student!.filingDate.toString()));
+      dateFiledController.text = formatted;
       studentIDController.text = student!.studentID;
       firstNameController.text = student!.firstName;
       lastNameController.text = student!.lastName;
@@ -159,6 +165,14 @@ class _StudentDetailsState extends State<StudentDetails> {
                   selectedCourse = value;
                 });
               },
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            TextFormField(
+              enabled: false,
+              controller: dateFiledController,
+              decoration: const InputDecoration(labelText: 'Date Filed'),
             ),
             const SizedBox(
               height: 20.0,
