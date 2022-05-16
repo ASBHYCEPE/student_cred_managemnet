@@ -20,6 +20,14 @@ class _StudentDetailsState extends State<StudentDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final studentIDController = TextEditingController();
+    final firstNameController = TextEditingController();
+    final lastNameController = TextEditingController();
+    final middleNameController = TextEditingController();
+    final admissionYearController = TextEditingController();
+    final courseController = TextEditingController();
+    final departmentController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
