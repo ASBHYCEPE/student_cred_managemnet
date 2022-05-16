@@ -36,7 +36,8 @@ class _StudentDetailsState extends State<StudentDetails> {
       lastNameController.text = student!.lastName;
       middleNameController.text = student!.middleName;
       admissionYearController.text = student!.admissionYear;
-      selectedCourse = null;
+      course = getCourse(student!.department);
+      selectedCourse = student!.course;
       selectedDepartment = student!.department;
     }
 
@@ -123,29 +124,7 @@ class _StudentDetailsState extends State<StudentDetails> {
               value: selectedDepartment,
               onChanged: (String? value) {
                 selectedCourse = null;
-                switch (value) {
-                  case 'Arts and Science':
-                    course = AcademicProgram.ASCourse;
-                    break;
-                  case 'Business and Accountancy':
-                    course = AcademicProgram.BACourse;
-                    break;
-                  case 'Computer Studies':
-                    course = AcademicProgram.CSCourse;
-                    break;
-                  case 'Criminal Justice Education':
-                    course = AcademicProgram.CJECourse;
-                    break;
-                  case 'Education':
-                    course = AcademicProgram.educCourse;
-                    break;
-                  case 'Engineering and Architecture':
-                    course = AcademicProgram.EACourse;
-                    break;
-                  case 'Nursing':
-                    course = AcademicProgram.nursCourse;
-                    break;
-                }
+                course = getCourse(value!);
                 setState(() {
                   selectedDepartment = value;
                 });
@@ -232,5 +211,24 @@ class _StudentDetailsState extends State<StudentDetails> {
         ),
       ),
     );
+  }
+
+  List<String> getCourse(String department) {
+    switch (department) {
+      case 'Arts and Science':
+        return AcademicProgram.ASCourse;
+      case 'Business and Accountancy':
+        return AcademicProgram.BACourse;
+      case 'Computer Studies':
+        return AcademicProgram.CSCourse;
+      case 'Criminal Justice Education':
+        return AcademicProgram.CJECourse;
+      case 'Education':
+        return AcademicProgram.educCourse;
+      case 'Engineering and Architecture':
+        return AcademicProgram.EACourse;
+      default:
+        return AcademicProgram.nursCourse;
+    }
   }
 }
