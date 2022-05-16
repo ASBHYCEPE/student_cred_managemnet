@@ -42,6 +42,7 @@ class _StudentDetailsState extends State<StudentDetails> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
         title: Text(appBarTitle),
