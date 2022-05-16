@@ -29,18 +29,22 @@ class _StudentDetailsState extends State<StudentDetails> {
   _StudentDetailsState({required this.appBarTitle, this.student});
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     if (student != null) {
       studentIDController.text = student!.studentID;
       firstNameController.text = student!.firstName;
       lastNameController.text = student!.lastName;
       middleNameController.text = student!.middleName;
       admissionYearController.text = student!.admissionYear;
+      selectedDepartment = student!.department;
       course = getCourse(student!.department);
       selectedCourse = student!.course;
-      selectedDepartment = student!.department;
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
