@@ -25,8 +25,6 @@ class _StudentDetailsState extends State<StudentDetails> {
     final lastNameController = TextEditingController();
     final middleNameController = TextEditingController();
     final admissionYearController = TextEditingController();
-    final courseController = TextEditingController();
-    final departmentController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -55,6 +53,7 @@ class _StudentDetailsState extends State<StudentDetails> {
               height: 16.0,
             ),
             TextFormField(
+              controller: studentIDController,
               decoration: const InputDecoration(labelText: 'Student ID'),
             ),
             const SizedBox(
@@ -63,6 +62,7 @@ class _StudentDetailsState extends State<StudentDetails> {
             Row(children: <Widget>[
               Expanded(
                 child: TextFormField(
+                  controller: firstNameController,
                   decoration: const InputDecoration(labelText: 'First Name'),
                 ),
               ),
@@ -71,6 +71,7 @@ class _StudentDetailsState extends State<StudentDetails> {
               ),
               Expanded(
                 child: TextFormField(
+                  controller: lastNameController,
                   decoration: const InputDecoration(labelText: 'Last Name'),
                 ),
               ),
@@ -79,6 +80,7 @@ class _StudentDetailsState extends State<StudentDetails> {
               ),
               Expanded(
                 child: TextFormField(
+                  controller: middleNameController,
                   decoration: const InputDecoration(labelText: 'Middle Name'),
                 ),
               ),
@@ -87,6 +89,7 @@ class _StudentDetailsState extends State<StudentDetails> {
               height: 10.0,
             ),
             TextFormField(
+              controller: admissionYearController,
               decoration: const InputDecoration(labelText: 'Admission Year'),
             ),
             const SizedBox(
