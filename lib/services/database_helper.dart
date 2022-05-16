@@ -20,7 +20,7 @@ class DatabaseHelper {
 
   Future<Database> _initDB(String dbName) async {
     final dbFilePath = await getDatabasesPath();
-    final path = join(dbName, dbFilePath);
+    final path = join(dbFilePath, dbName);
 
     return openDatabase(path, version: _version, onCreate: _createDB);
   }
@@ -58,11 +58,11 @@ class DatabaseHelper {
 
     return db.rawInsert('''INSERT INTO 
         student(
-          studentid, 
-          firstname, 
-          lastname, 
-          middlename, 
-          admissionyear, 
+          studentId, 
+          firstName, 
+          lastName, 
+          middleName, 
+          admissionYear, 
           course, 
           department) 
           VALUES(?,?,?,?,?,?,?);''', [
@@ -78,8 +78,8 @@ class DatabaseHelper {
 
   Future<int> updateStudent(Student student) async {
     final db = await database;
-    return await db.update('contacts', student.toJson(),
-        where: 'id = ?',
+    return await db.update('student', student.toJson(),
+        where: 'studentId = ?',
         whereArgs: [student.studentID],
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
@@ -87,7 +87,7 @@ class DatabaseHelper {
   Future<int> deleteStudent(Student student) async {
     final db = await database;
 
-    return db
-        .delete('contacts', where: 'id = ?', whereArgs: [student.studentID]);
+    return db.delete('student',
+        where: 'studentId = ?', whereArgs: [student.studentID]);
   }
 }
