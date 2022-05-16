@@ -2,6 +2,7 @@ import 'package:cred_management/models/student.dart';
 import 'package:cred_management/services/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:cred_management/models/academic_program.dart';
+import 'package:flutter/services.dart';
 
 class StudentDetails extends StatefulWidget {
   final String appBarTitle;
@@ -75,6 +76,7 @@ class _StudentDetailsState extends State<StudentDetails> {
             TextFormField(
               controller: studentIDController,
               decoration: const InputDecoration(labelText: 'Student ID'),
+              keyboardType: TextInputType.phone,
             ),
             const SizedBox(
               height: 10.0,
@@ -111,6 +113,8 @@ class _StudentDetailsState extends State<StudentDetails> {
             TextFormField(
               controller: admissionYearController,
               decoration: const InputDecoration(labelText: 'Admission Year'),
+              keyboardType: TextInputType.phone,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             const SizedBox(
               height: 20.0,
