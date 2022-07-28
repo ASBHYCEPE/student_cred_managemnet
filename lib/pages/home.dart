@@ -79,8 +79,9 @@ class Home extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    StudentList(department: 'Education')));
+                                builder: (context) => StudentList(
+                                    department: 'Education',
+                                    appBarTitle: 'Education')));
                       },
                       child: const Text(
                         'COLLEGE OF EDUCATION',
@@ -103,8 +104,9 @@ class Home extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    StudentList(department: 'Nursing')));
+                                builder: (context) => StudentList(
+                                    department: 'Nursing',
+                                    appBarTitle: 'Nursing')));
                       },
                       child: const Text(
                         'COLLEGE OF NURSING',
@@ -128,7 +130,8 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => StudentList(
-                                    department: 'Computer Studies')));
+                                    department: 'Computer Studies',
+                                    appBarTitle: 'Computer Studies')));
                       },
                       child: const Text(
                         'COLLEGE OF COMPUTER STUDIES',
@@ -152,7 +155,8 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => StudentList(
-                                    department: 'Arts and Sciences')));
+                                    department: 'Arts and Sciences',
+                                    appBarTitle: 'Arts and Sciences')));
                       },
                       child: const Text(
                         'COLLEGE OF ARTS AND SCIENCES',
@@ -176,7 +180,8 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => StudentList(
-                                    department: 'Business and Accountancy')));
+                                    department: 'Business and Accountancy',
+                                    appBarTitle: 'Business and Accountancy')));
                       },
                       child: const Text(
                         'COLLEGE OF BUSINESS AND ACCOUNTANCY',
@@ -200,7 +205,9 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => StudentList(
-                                    department: 'Criminal Justice Education')));
+                                    department: 'Criminal Justice Education',
+                                    appBarTitle:
+                                        'Criminal Justice Education')));
                       },
                       child: const Text(
                         'COLLEGE OF CRIMINAL JUSTICE EDUCATION',
@@ -224,7 +231,8 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => StudentList(
-                                    department:
+                                    department: 'Engineering and Architecture',
+                                    appBarTitle:
                                         'Engineering and Architecture')));
                       },
                       child: const Text(

@@ -6,23 +6,27 @@ import 'package:flutter/material.dart';
 
 class StudentList extends StatefulWidget {
   String department;
-  StudentList({Key? key, required this.department}) : super(key: key);
+  final String appBarTitle;
+  StudentList({Key? key, required this.department, required this.appBarTitle})
+      : super(key: key);
 
   @override
-  State<StudentList> createState() => _StudentListState(department);
+  State<StudentList> createState() =>
+      _StudentListState(department, appBarTitle);
 }
 
 class _StudentListState extends State<StudentList> {
   final String department;
+  final String appBarTitle;
 
-  _StudentListState(this.department);
+  _StudentListState(this.department, this.appBarTitle);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
-        title: const Text('Credential Management'),
+        title: Text(appBarTitle),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
           child: Container(
