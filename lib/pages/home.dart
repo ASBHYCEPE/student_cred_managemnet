@@ -1,3 +1,5 @@
+import 'package:cred_management/pages/student_details.dart';
+import 'package:cred_management/pages/student_list.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -25,7 +27,13 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StudentDetails(
+                                    appBarTitle: 'Add New Student')));
+                      },
                       child: const Text(
                         'ADD STUDENT',
                         style: TextStyle(
@@ -61,7 +69,13 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    StudentList(department: 'Education')));
+                      },
                       child: const Text(
                         'COLLEGE OF EDUCATION',
                         style: TextStyle(
@@ -79,7 +93,13 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    StudentList(department: 'Nursing')));
+                      },
                       child: const Text(
                         'COLLEGE OF NURSING',
                         style: TextStyle(
@@ -97,7 +117,13 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StudentList(
+                                    department: 'Computer Studies')));
+                      },
                       child: const Text(
                         'COLLEGE OF COMPUTER STUDIES',
                         style: TextStyle(
@@ -115,7 +141,13 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StudentList(
+                                    department: 'Arts and Sciences')));
+                      },
                       child: const Text(
                         'COLLEGE OF ARTS AND SCIENCES',
                         style: TextStyle(
@@ -133,7 +165,13 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StudentList(
+                                    department: 'Business and Accountancy')));
+                      },
                       child: const Text(
                         'COLLEGE OF BUSINESS AND ACCOUNTANCY',
                         style: TextStyle(
@@ -151,7 +189,13 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StudentList(
+                                    department: 'Criminal Justice Education')));
+                      },
                       child: const Text(
                         'COLLEGE OF CRIMINAL JUSTICE EDUCATION',
                         style: TextStyle(
@@ -169,7 +213,14 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StudentList(
+                                    department:
+                                        'Engineering and Architecture')));
+                      },
                       child: const Text(
                         'COLLEGE OF ENGINEERING AND ARCHITECTURE',
                         style: TextStyle(
