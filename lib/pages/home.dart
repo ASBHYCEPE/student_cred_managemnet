@@ -1,3 +1,4 @@
+import 'package:cred_management/pages/search_student.dart';
 import 'package:cred_management/pages/student_details.dart';
 import 'package:cred_management/pages/student_list.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,12 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchStudent()));
+                      },
                       child: const Text(
                         'SEARCH STUDENT',
                         style: TextStyle(
