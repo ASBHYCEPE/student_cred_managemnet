@@ -5,13 +5,18 @@ import 'package:cred_management/widget/student_card.dart';
 import 'package:flutter/material.dart';
 
 class StudentList extends StatefulWidget {
-  StudentList({Key? key}) : super(key: key);
+  String department;
+  StudentList({Key? key, required this.department}) : super(key: key);
 
   @override
-  State<StudentList> createState() => _StudentListState();
+  State<StudentList> createState() => _StudentListState(department);
 }
 
 class _StudentListState extends State<StudentList> {
+  final String department;
+
+  _StudentListState(this.department);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +30,6 @@ class _StudentListState extends State<StudentList> {
             height: 3.0,
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      StudentDetails(appBarTitle: 'Add New Student')));
-          setState(() {});
-        },
-        child: const Icon(Icons.person_add),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -51,53 +45,59 @@ class _StudentListState extends State<StudentList> {
                 if (snapshot.data != null) {
                   return ListView.builder(
                       itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) => StudentCard(
-                            student: snapshot.data![index],
-                            onTap: () async {
-                              await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => StudentDetails(
-                                            student: snapshot.data![index],
-                                            appBarTitle: 'UPDATE STUDENT',
-                                          )));
-                              setState(() {});
-                            },
-                            onLongPress: () async {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: const Text(
-                                          'Are your sure you want to delete this?'),
-                                      actions: [
-                                        ElevatedButton(
-                                          child: const Text('YES'),
-                                          style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.red)),
-                                          onPressed: () async {
-                                            await DatabaseHelper.instance
-                                                .deleteStudent(
-                                                    snapshot.data![index]);
-                                            Navigator.pop(context);
-                                            setState(() {});
-                                          },
-                                        ),
-                                        ElevatedButton(
-                                            child: const Text('NO'),
+                      itemBuilder: (context, index) => snapshot
+                              .data![index].department
+                              .contains(department)
+                          ? StudentCard(
+                              student: snapshot.data![index],
+                              onTap: () async {
+                                await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => StudentDetails(
+                                              student: snapshot.data![index],
+                                              appBarTitle: 'UPDATE STUDENT',
+                                            )));
+                                setState(() {});
+                              },
+                              onLongPress: () async {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text(
+                                            'Are your sure you want to delete this?'),
+                                        actions: [
+                                          ElevatedButton(
+                                            child: const Text('YES'),
                                             style: ButtonStyle(
                                                 backgroundColor:
                                                     MaterialStateProperty.all(
-                                                        Colors.green)),
-                                            onPressed: () =>
-                                                Navigator.pop(context))
-                                      ],
-                                    );
-                                  });
-                            },
-                          ));
+                                                        Colors.red)),
+                                            onPressed: () async {
+                                              await DatabaseHelper.instance
+                                                  .deleteStudent(
+                                                      snapshot.data![index]);
+                                              Navigator.pop(context);
+                                              setState(() {});
+                                            },
+                                          ),
+                                          ElevatedButton(
+                                              child: const Text('NO'),
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.green)),
+                                              onPressed: () =>
+                                                  Navigator.pop(context))
+                                        ],
+                                      );
+                                    });
+                              },
+                            )
+                          : const Center(
+                              child: Text('NO AVAILABLE STUDENTS'),
+                            ));
                 }
               }
               return const Center(
